@@ -1,0 +1,55 @@
+{
+  "name": "runtime-configurator",
+  "version": "1.0.0",
+  "description": "Painless runtime configuration for Node.js applications.",
+  "keywords": [
+    "command-line-arguments",
+    "configuration",
+    "configuration-management",
+    "environment-variables",
+    "file-system",
+    "runtime-configuration"
+  ],
+  "author": "Damian Łysiak <damian.lysiak@gmail.com>",
+  "homepage": "https://github.com/damlys/node-runtime-configurator#readme",
+  "repository": "https://github.com/damlys/node-runtime-configurator",
+  "bugs": "https://github.com/damlys/node-runtime-configurator/issues",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "directories": {
+    "example": "examples",
+    "lib": "src",
+    "test": "tests"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "dependencies": {
+    "camelcase": "^5.3.1",
+    "cli-table3": "^0.5.1",
+    "deep-freeze": "0.0.1",
+    "minimist": "^1.2.0",
+    "mixin-deep": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^12.7.12",
+    "jest": "^24.9.0",
+    "strip-ansi": "^5.2.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4"
+  },
+  "scripts": {
+    "build": "rm -rf dist/ && tsc",
+    "lint": "tslint --exclude './node_modules/**/*' --exclude './dist/**/*' './**/*.{ts,js}'",
+    "lint-fix": "tslint --exclude './node_modules/**/*' --exclude './dist/**/*' './**/*.{ts,js}' --fix",
+    "test": "jest",
+    "test-watch": "jest --watchAll"
+  }
+}

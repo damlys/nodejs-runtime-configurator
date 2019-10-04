@@ -1,0 +1,24 @@
+#############################
+### IDE
+#############################
+
+/*.code-workspace
+/*.sublime-project
+/*.sublime-workspace
+/.idea
+/.vscode
+
+#############################
+### System files
+#############################
+
+/**/*~
+/**/.DS_Store
+/**/desktop.ini
+/**/thumbs.db
+
+#############################
+### Project files
+#############################
+
+/node_modules

@@ -1,0 +1,12 @@
+{
+  "alpha": {
+    "beta": {
+      "gamma": true
+    }
+  },
+  "delta": true,
+  "epsilon": {
+    "zeta": true
+  },
+  "eta": [1, 2, 3]
+}

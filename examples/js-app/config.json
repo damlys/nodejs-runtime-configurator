@@ -1,0 +1,5 @@
+{
+  "mailer": {
+    "replyToAddresses": ["bob@example.tld"]
+  }
+}
