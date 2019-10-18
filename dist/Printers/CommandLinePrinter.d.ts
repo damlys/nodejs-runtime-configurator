@@ -1,6 +1,6 @@
 import { ConfigurationItemInterface } from "../Schema/ConfigurationItemInterface";
-import { PrinterInterface } from "./PrinterInterface";
-export declare class CommandLinePrinter implements PrinterInterface {
+import { ConfigurationPrinterInterface } from "./ConfigurationPrinterInterface";
+export declare class CommandLinePrinter implements ConfigurationPrinterInterface {
     private readonly tableWidth;
     constructor(tableWidth?: number);
     render(items: ConfigurationItemInterface[]): string;

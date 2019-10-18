@@ -1,7 +1,5 @@
 import { ConfigurationItemInterface } from "../Schema/ConfigurationItemInterface";
-
-export interface PrinterInterface {
+export interface ConfigurationPrinterInterface {
     render(items: ConfigurationItemInterface[]): string;
-
     print(items: ConfigurationItemInterface[]): void;
 }

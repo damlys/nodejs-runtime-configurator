@@ -2,7 +2,7 @@ export * from "./CommandLineArguments";
 export * from "./EnvironmentVariables";
 
 export * from "./Printers/CommandLinePrinter";
-export * from "./Printers/PrinterInterface";
+export * from "./Printers/ConfigurationPrinterInterface";
 
 export * from "./Schema/ConfigurationBag";
 export * from "./Schema/ConfigurationBagInterface";

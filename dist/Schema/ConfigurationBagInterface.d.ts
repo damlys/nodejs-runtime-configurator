@@ -1,7 +1,7 @@
-import { PrinterInterface } from "../Printers/PrinterInterface";
+import { ConfigurationPrinterInterface } from "../Printers/ConfigurationPrinterInterface";
 export interface ConfigurationBagInterface {
     has(key: string): boolean;
     get(key: string): any;
-    render(printer: PrinterInterface): string;
-    print(printer: PrinterInterface): void;
+    render(printer: ConfigurationPrinterInterface): string;
+    print(printer: ConfigurationPrinterInterface): void;
 }

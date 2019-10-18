@@ -1,4 +1,4 @@
-import { PrinterInterface } from "../Printers/PrinterInterface";
+import { ConfigurationPrinterInterface } from "../Printers/ConfigurationPrinterInterface";
 import { ConfigurationSourceInterface } from "../Sources/ConfigurationSourceInterface";
 import { SourcesAggregator } from "../Sources/SourcesAggregator";
 import { getFromObjectByPath } from "../utils";
@@ -50,11 +50,11 @@ export class ConfigurationBag implements ConfigurationBagInterface {
         return item.getValue();
     }
 
-    public render(printer: PrinterInterface): string {
+    public render(printer: ConfigurationPrinterInterface): string {
         return printer.render(this.items);
     }
 
-    public print(printer: PrinterInterface): void {
+    public print(printer: ConfigurationPrinterInterface): void {
         return printer.print(this.items);
     }
 

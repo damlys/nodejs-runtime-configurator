@@ -44,7 +44,7 @@ import {
     EnvironmentVariablesSource,
     FileSource,
 
-    PrinterInterface,
+    ConfigurationPrinterInterface,
     CommandLinePrinter
 } from "runtime-configurator";
 ```
@@ -119,6 +119,7 @@ and the second one with
 ```
 $ git clone git@github.com:damlys/node-runtime-configurator.git
 $ cd node-runtime-configurator/
+$ npm install
 $ npm run build
 $ npm run lint(-fix)
 $ npm run test(-watch)

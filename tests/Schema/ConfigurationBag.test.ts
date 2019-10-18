@@ -1,5 +1,5 @@
 import "jest";
-import { PrinterInterface } from "../../src/Printers/PrinterInterface";
+import { ConfigurationPrinterInterface } from "../../src/Printers/ConfigurationPrinterInterface";
 import { ConfigurationBag } from "../../src/Schema/ConfigurationBag";
 import { ConfigurationBagInterface } from "../../src/Schema/ConfigurationBagInterface";
 import { ConfigurationItem } from "../../src/Schema/ConfigurationItem";
@@ -109,7 +109,7 @@ test("should use printer to generate documentation", () => {
 
     const configurationBag: ConfigurationBagInterface = new ConfigurationBag(items, sources);
 
-    const printer: PrinterInterface = {
+    const printer: ConfigurationPrinterInterface = {
         render(i: ConfigurationItemInterface[]): string {
             return "render result";
         },

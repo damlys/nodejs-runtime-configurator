@@ -1,8 +1,8 @@
 import * as cliTable3 from "cli-table3";
 import { ConfigurationItemInterface } from "../Schema/ConfigurationItemInterface";
-import { PrinterInterface } from "./PrinterInterface";
+import { ConfigurationPrinterInterface } from "./ConfigurationPrinterInterface";
 
-export class CommandLinePrinter implements PrinterInterface {
+export class CommandLinePrinter implements ConfigurationPrinterInterface {
     private readonly tableWidth: number;
 
     public constructor(tableWidth: number = process.stdout.columns) {
