@@ -36,6 +36,7 @@ import {
     ArrayValidator,
     BooleanValidator,
     NumberValidator,
+    RegularExpressionValidator,
     StringValidator,
 
     ConfigurationSourceInterface,

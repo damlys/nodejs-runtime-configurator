@@ -18,5 +18,6 @@ test("should export package stuff", () => {
     expect(index).toHaveProperty("ArrayValidator");
     expect(index).toHaveProperty("BooleanValidator");
     expect(index).toHaveProperty("NumberValidator");
+    expect(index).toHaveProperty("RegularExpressionValidator");
     expect(index).toHaveProperty("StringValidator");
 });
