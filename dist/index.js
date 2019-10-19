@@ -15,6 +15,8 @@ __export(require("./Sources/FileSource"));
 __export(require("./Sources/SourcesAggregator"));
 __export(require("./Validators/ArrayValidator"));
 __export(require("./Validators/BooleanValidator"));
+__export(require("./Validators/ConfigurationValidatorError"));
+__export(require("./Validators/EnumerableValidator"));
 __export(require("./Validators/NumberValidator"));
 __export(require("./Validators/RegularExpressionValidator"));
 __export(require("./Validators/StringValidator"));
