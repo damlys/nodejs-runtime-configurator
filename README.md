@@ -103,8 +103,14 @@ Btw. now you are able to override `httpServer.port` value with:
                                 
 - any `.js` and `.json` file inside `/etc/app` directory,
 - `/etc/app.json` file,
-- `APP__HTTP_SERVER__PORT` environment variable,
-- `--override=httpServer.port=...` command line argument.
+- following environment variables:
+    - `APP__HTTP_SERVER__PORT=1234`,
+    - `APP__HTTP_SERVER='{"port":1234}'`,
+    - `APP='{"httpServer":{"port":1234}}'`,
+- following command line arguments:
+    - `--override=httpServer.port=1234`,
+    - `--override=httpServer='{"port":1234}'`,
+    - `--override='{"httpServer":{"port":1234}}'`.
 
 Enjoy!
 
@@ -123,5 +129,5 @@ $ cd node-runtime-configurator/
 $ npm install
 $ npm run build
 $ npm run lint(-fix)
-$ npm run test(-watch)
+$ npm run test(-coverage|-watch)
 ```

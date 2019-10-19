@@ -18,7 +18,7 @@ test("should fill in values with defaults and resolved object", () => {
         ],
         [
             {
-                resolve: () => {
+                resolve: (): object => {
                     return { alpha: { beta: 1 } };
                 },
             },
@@ -65,7 +65,7 @@ test("should validate configuration items", () => {
             ],
             [
                 {
-                    resolve: () => {
+                    resolve: (): object => {
                         return { beta: null };
                     },
                 },
@@ -87,7 +87,7 @@ test("should validate configuration items", () => {
             ],
             [
                 {
-                    resolve: () => {
+                    resolve: (): object => {
                         return { beta: null, gamma: 1, delta: 1 };
                     },
                 },

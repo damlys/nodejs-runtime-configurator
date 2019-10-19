@@ -7,17 +7,17 @@ import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
 
 export class EnvironmentVariablesSource implements ConfigurationSourceInterface {
-    private readonly variablesNamePrefix: string;
+    private readonly variableName: string;
     private readonly environmentVariables: EnvironmentVariables;
 
     public constructor(
-        variablesNamePrefix: string = "APP",
+        variableName: string = "APP",
         environmentVariables: EnvironmentVariables = process.env,
     ) {
-        if (variablesNamePrefix === "") {
-            throw new ConfigurationSourceError("The environment variables name prefix can not be empty.");
+        if (variableName === "") {
+            throw new ConfigurationSourceError("The environment variable name can not be empty.");
         }
-        this.variablesNamePrefix = variablesNamePrefix;
+        this.variableName = variableName;
         this.environmentVariables = environmentVariables;
     }
 
@@ -25,7 +25,13 @@ export class EnvironmentVariablesSource implements ConfigurationSourceInterface 
         const objects: object[] = [];
         for (const key in this.environmentVariables) {
             if (this.environmentVariables.hasOwnProperty(key)) {
-                if (key.startsWith(this.variablesNamePrefix + "__")) {
+                if (key === this.variableName) {
+                    const value: any = tryParseJson(this.environmentVariables[key] as string);
+                    if (typeof value !== "object" || value === null || value instanceof Array) {
+                        throw new ConfigurationSourceError(`The "${this.variableName}" environment variable must contain an object.`);
+                    }
+                    objects.push(value);
+                } else if (key.startsWith(this.variableName + "__")) {
                     objects.push(
                         createObjectByPathAndValue(
                             this.keyToPath(key),

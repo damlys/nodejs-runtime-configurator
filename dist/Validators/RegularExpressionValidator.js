@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class RegularExpressionValidator {
-    constructor(regexp) {
-        this.regularExpression = regexp;
+    constructor(regularExpression) {
+        this.regularExpression = regularExpression;
     }
     validate(value) {
         if (typeof value !== "string") {

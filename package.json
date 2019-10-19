@@ -47,9 +47,11 @@
   },
   "scripts": {
     "build": "rm -rf dist/ && tsc",
-    "lint": "tslint --exclude './node_modules/**/*' --exclude './dist/**/*' './**/*.{ts,js}'",
-    "lint-fix": "tslint --exclude './node_modules/**/*' --exclude './dist/**/*' './**/*.{ts,js}' --fix",
+    "lint": "tslint --exclude './node_modules/**/*' --exclude './dist/**/*' --exclude './coverage/**/*' './**/*.{ts,js}'",
+    "lint-fix": "tslint --exclude './node_modules/**/*' --exclude './dist/**/*' --exclude './coverage/**/*' './**/*.{ts,js}' --fix",
     "test": "jest",
-    "test-watch": "jest --watchAll"
+    "test-coverage": "rm -rf coverage/ && jest --coverage",
+    "test-watch": "jest --watchAll",
+    "all": "npm run build && npm run lint && npm run test-coverage"
   }
 }

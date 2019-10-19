@@ -28,11 +28,15 @@ class CommandLineSource {
         }
         return mixin({}, ...overrides.map((override) => {
             if (override === "") {
-                return {};
+                throw new ConfigurationSourceError_1.ConfigurationSourceError(`One or more "--${this.argumentName}" command line arguments does not define configuration item name.`);
+            }
+            const jsonValue = utils_1.tryParseJson(override);
+            if (typeof jsonValue === "object" && jsonValue !== null && !(jsonValue instanceof Array)) {
+                return jsonValue;
             }
             const index = override.indexOf("=");
             if (index === -1) {
-                return {};
+                throw new ConfigurationSourceError_1.ConfigurationSourceError(`One or more "--${this.argumentName}" command line arguments does not define configuration item value.`);
             }
             return utils_1.createObjectByPathAndValue(this.keyToPath(override.substr(0, index)), utils_1.tryParseJson(override.substr(index + 1)));
         }));

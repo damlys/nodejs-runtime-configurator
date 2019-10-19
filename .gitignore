@@ -21,4 +21,5 @@
 ### Project files
 #############################
 
+/coverage
 /node_modules

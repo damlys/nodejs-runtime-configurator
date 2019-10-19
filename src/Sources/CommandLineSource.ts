@@ -42,12 +42,17 @@ export class CommandLineSource implements ConfigurationSourceInterface {
             {},
             ...overrides.map((override: string): object => {
                 if (override === "") {
-                    return {};
+                    throw new ConfigurationSourceError(`One or more "--${this.argumentName}" command line arguments does not define configuration item name.`);
+                }
+
+                const jsonValue: any = tryParseJson(override);
+                if (typeof jsonValue === "object" && jsonValue !== null && !(jsonValue instanceof Array)) {
+                    return jsonValue;
                 }
 
                 const index: number = override.indexOf("=");
                 if (index === -1) {
-                    return {};
+                    throw new ConfigurationSourceError(`One or more "--${this.argumentName}" command line arguments does not define configuration item value.`);
                 }
 
                 return createObjectByPathAndValue(

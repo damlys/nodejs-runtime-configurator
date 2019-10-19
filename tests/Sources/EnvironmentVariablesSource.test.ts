@@ -4,19 +4,20 @@ import { ConfigurationSourceError } from "../../src/Sources/ConfigurationSourceE
 import { ConfigurationSourceInterface } from "../../src/Sources/ConfigurationSourceInterface";
 import { EnvironmentVariablesSource } from "../../src/Sources/EnvironmentVariablesSource";
 
-test("should check if a name prefix is not empty", () => {
+test("should check if a variable name is not empty", () => {
     const envs: EnvironmentVariables = {
         HOME: "/root",
         PWD: "/root/pictures/memes",
     };
     expect(() => new EnvironmentVariablesSource("", envs))
-        .toThrow(new ConfigurationSourceError("The environment variables name prefix can not be empty."));
+        .toThrow(new ConfigurationSourceError("The environment variable name can not be empty."));
 });
 
-test("should process APP__ variables", () => {
+test("should process APP variables", () => {
     const envs: EnvironmentVariables = {
+        "APP": "{\"top\":          \"level\"}",
         "APP________Alpha_ALPHA________-BETA---beta-": "gamma",
-        "APP__ARR": "[1,2,3]",
+        "APP__ARR": "[1,2,      \n  3]",
         "APP__OBJ": "{\"alpha\":null}",
         "APP__PRIMITIVE_TYPES__BOOL": "true",
         "APP__PRIMITIVE_TYPES__EMPTY": "",
@@ -33,6 +34,7 @@ test("should process APP__ variables", () => {
     const envsSource: ConfigurationSourceInterface = new EnvironmentVariablesSource("APP", envs);
     expect(envsSource.resolve())
         .toEqual({
+            top: "level",
             alphaAlpha: {
                 betaBeta: "gamma",
             },
@@ -50,18 +52,29 @@ test("should process APP__ variables", () => {
         });
 });
 
-test("should resolve empty object", () => {
-    const envs: EnvironmentVariables = {
-        APP__ALPHA: "beta",
-        HOME: "/root",
-        PWD: "/root/pictures/memes",
-    };
-    const envsSource: ConfigurationSourceInterface = new EnvironmentVariablesSource("MY_APP", envs);
-    expect(envsSource.resolve())
-        .toEqual({});
+test("should throw an error if a top level variable does not contain an object", () => {
+    for (const value of [
+        "undefined",
+        "null",
+        "false",
+        "0",
+        "",
+        "whatever",
+        "[1, 2, 3]",
+        "{\"alpha\": \"beta\"", // note: lack of closing bracket
+    ]) {
+        const envs: EnvironmentVariables = {
+            HOME: "/root",
+            PWD: "/root/pictures/memes",
+            APP: value,
+        };
+        const envsSource: ConfigurationSourceInterface = new EnvironmentVariablesSource("APP", envs);
+        expect(() => envsSource.resolve())
+            .toThrow(new ConfigurationSourceError(`The "APP" environment variable must contain an object.`));
+    }
 });
 
-test("should process MY_APP__ variables", () => {
+test("should process MY_APP variables", () => {
     const envs: EnvironmentVariables = {
         MY_APP__ALPHA: "beta",
         APP__GAMMA: "delta",
@@ -73,4 +86,15 @@ test("should process MY_APP__ variables", () => {
         .toEqual({
             alpha: "beta",
         });
+});
+
+test("should resolve empty object", () => {
+    const envs: EnvironmentVariables = {
+        APP__ALPHA: "beta",
+        HOME: "/root",
+        PWD: "/root/pictures/memes",
+    };
+    const envsSource: ConfigurationSourceInterface = new EnvironmentVariablesSource("MY_APP", envs);
+    expect(envsSource.resolve())
+        .toEqual({});
 });

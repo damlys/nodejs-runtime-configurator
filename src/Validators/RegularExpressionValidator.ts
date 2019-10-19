@@ -3,8 +3,8 @@ import { ConfigurationValidatorInterface } from "./ConfigurationValidatorInterfa
 export class RegularExpressionValidator implements ConfigurationValidatorInterface {
     private readonly regularExpression: RegExp;
 
-    public constructor(regexp: RegExp) {
-        this.regularExpression = regexp;
+    public constructor(regularExpression: RegExp) {
+        this.regularExpression = regularExpression;
     }
 
     public validate(value: any): string[] {

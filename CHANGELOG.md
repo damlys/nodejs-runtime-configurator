@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Handle object notation within top-level command line arguments and environment variables.
+
+### Changed
+
+- Command line source throws an error on invalid name or value.
+
 ## [1.0.1] - 2019-10-18
 
 ### Added
