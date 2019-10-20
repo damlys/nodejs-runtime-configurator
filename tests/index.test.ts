@@ -20,6 +20,7 @@ test("should export package stuff", () => {
     expect(index).toHaveProperty("ConfigurationValidatorError");
     expect(index).toHaveProperty("EnumerableValidator");
     expect(index).toHaveProperty("NumberValidator");
+    expect(index).toHaveProperty("ObjectValidator");
     expect(index).toHaveProperty("RegularExpressionValidator");
     expect(index).toHaveProperty("StringValidator");
 });

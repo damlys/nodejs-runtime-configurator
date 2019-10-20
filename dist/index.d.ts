@@ -20,5 +20,6 @@ export * from "./Validators/ConfigurationValidatorError";
 export * from "./Validators/ConfigurationValidatorInterface";
 export * from "./Validators/EnumerableValidator";
 export * from "./Validators/NumberValidator";
+export * from "./Validators/ObjectValidator";
 export * from "./Validators/RegularExpressionValidator";
 export * from "./Validators/StringValidator";

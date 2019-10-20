@@ -18,5 +18,6 @@ __export(require("./Validators/BooleanValidator"));
 __export(require("./Validators/ConfigurationValidatorError"));
 __export(require("./Validators/EnumerableValidator"));
 __export(require("./Validators/NumberValidator"));
+__export(require("./Validators/ObjectValidator"));
 __export(require("./Validators/RegularExpressionValidator"));
 __export(require("./Validators/StringValidator"));

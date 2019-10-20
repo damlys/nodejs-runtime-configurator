@@ -37,6 +37,7 @@ import {
     BooleanValidator,
     EnumerableValidator,
     NumberValidator,
+    ObjectValidator,
     RegularExpressionValidator,
     StringValidator,
 
