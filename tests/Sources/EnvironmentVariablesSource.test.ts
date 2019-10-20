@@ -1,11 +1,10 @@
 import "jest";
-import { EnvironmentVariables } from "../../src/EnvironmentVariables";
 import { ConfigurationSourceError } from "../../src/Sources/ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "../../src/Sources/ConfigurationSourceInterface";
 import { EnvironmentVariablesSource } from "../../src/Sources/EnvironmentVariablesSource";
 
 test("should check if a variable name is not empty", () => {
-    const envs: EnvironmentVariables = {
+    const envs = {
         HOME: "/root",
         PWD: "/root/pictures/memes",
     };
@@ -14,7 +13,7 @@ test("should check if a variable name is not empty", () => {
 });
 
 test("should process APP variables", () => {
-    const envs: EnvironmentVariables = {
+    const envs = {
         "APP": "{\"top\":          \"level\"}",
         "APP________Alpha_ALPHA________-BETA---beta-": "gamma",
         "APP__ARR": "[1,2,      \n  3]",
@@ -63,7 +62,7 @@ test("should throw an error if a top level variable does not contain an object",
         "[1, 2, 3]",
         "{\"alpha\": \"beta\"", // note: lack of closing bracket
     ]) {
-        const envs: EnvironmentVariables = {
+        const envs = {
             HOME: "/root",
             PWD: "/root/pictures/memes",
             APP: value,
@@ -75,7 +74,7 @@ test("should throw an error if a top level variable does not contain an object",
 });
 
 test("should process MY_APP variables", () => {
-    const envs: EnvironmentVariables = {
+    const envs = {
         MY_APP__ALPHA: "beta",
         APP__GAMMA: "delta",
         HOME: "/root",
@@ -89,7 +88,7 @@ test("should process MY_APP variables", () => {
 });
 
 test("should resolve empty object", () => {
-    const envs: EnvironmentVariables = {
+    const envs = {
         APP__ALPHA: "beta",
         HOME: "/root",
         PWD: "/root/pictures/memes",

@@ -1,5 +1,7 @@
-import { EnvironmentVariables } from "../EnvironmentVariables";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
+interface EnvironmentVariables {
+    [key: string]: string | undefined;
+}
 export declare class EnvironmentVariablesSource implements ConfigurationSourceInterface {
     private readonly variableName;
     private readonly environmentVariables;
@@ -7,3 +9,4 @@ export declare class EnvironmentVariablesSource implements ConfigurationSourceIn
     resolve(): object;
     private keyToPath;
 }
+export {};

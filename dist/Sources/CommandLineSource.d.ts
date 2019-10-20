@@ -1,5 +1,5 @@
-import { CommandLineArguments } from "../CommandLineArguments";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
+declare type CommandLineArguments = string[];
 export declare class CommandLineSource implements ConfigurationSourceInterface {
     private readonly argumentName;
     private readonly commandLineArguments;
@@ -7,3 +7,4 @@ export declare class CommandLineSource implements ConfigurationSourceInterface {
     resolve(): object;
     private keyToPath;
 }
+export {};

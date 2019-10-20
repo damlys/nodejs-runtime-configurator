@@ -1,11 +1,10 @@
 import "jest";
-import { CommandLineArguments } from "../../src/CommandLineArguments";
 import { CommandLineSource } from "../../src/Sources/CommandLineSource";
 import { ConfigurationSourceError } from "../../src/Sources/ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "../../src/Sources/ConfigurationSourceInterface";
 
 test("should check if an argument name is not empty", () => {
-    const args: CommandLineArguments = [
+    const args = [
         "/bin/node",
         "/app.js",
         "run",
@@ -15,7 +14,7 @@ test("should check if an argument name is not empty", () => {
 });
 
 test("should process override arguments", () => {
-    const args: CommandLineArguments = [
+    const args = [
         "/bin/node",
         "/app.js",
         "--override={\"top1\":       \"level1\"}",
@@ -89,7 +88,7 @@ test("should throw an error if argument is invalid", () => {
 });
 
 test("should process one argument (--change-this)", () => {
-    const args: CommandLineArguments = [
+    const args = [
         "/bin/node",
         "/app.js",
         "--change-this=alpha=beta",
@@ -104,7 +103,7 @@ test("should process one argument (--change-this)", () => {
 });
 
 test("should handle no arguments", () => {
-    const args: CommandLineArguments = [
+    const args = [
         "/bin/node",
         "/app.js",
         "run",

@@ -1,10 +1,13 @@
 import * as camelCase from "camelcase";
 // @ts-ignore
 import * as mixin from "mixin-deep";
-import { EnvironmentVariables } from "../EnvironmentVariables";
 import { createObjectByPathAndValue, tryParseJson } from "../utils";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
+
+interface EnvironmentVariables {
+    [key: string]: string | undefined;
+}
 
 export class EnvironmentVariablesSource implements ConfigurationSourceInterface {
     private readonly variableName: string;

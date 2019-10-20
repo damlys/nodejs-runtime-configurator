@@ -2,10 +2,11 @@ import * as camelCase from "camelcase";
 import * as minimist from "minimist";
 // @ts-ignore
 import * as mixin from "mixin-deep";
-import { CommandLineArguments } from "../CommandLineArguments";
 import { createObjectByPathAndValue, tryParseJson } from "../utils";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
+
+type CommandLineArguments = string[];
 
 export class CommandLineSource implements ConfigurationSourceInterface {
     private readonly argumentName: string;

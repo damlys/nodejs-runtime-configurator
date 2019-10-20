@@ -1,6 +1,3 @@
-export * from "./CommandLineArguments";
-export * from "./EnvironmentVariables";
-
 export * from "./Printers/CommandLinePrinter";
 export * from "./Printers/ConfigurationPrinterInterface";
 
