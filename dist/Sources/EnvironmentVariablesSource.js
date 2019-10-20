@@ -14,22 +14,21 @@ class EnvironmentVariablesSource {
         this.environmentVariables = environmentVariables;
     }
     resolve() {
-        const objects = [];
-        for (const key in this.environmentVariables) {
-            if (this.environmentVariables.hasOwnProperty(key)) {
-                if (key === this.variableName) {
-                    const value = utils_1.tryParseJson(this.environmentVariables[key]);
-                    if (typeof value !== "object" || value === null || value instanceof Array) {
-                        throw new ConfigurationSourceError_1.ConfigurationSourceError(`The "${this.variableName}" environment variable must contain an object.`);
-                    }
-                    objects.push(value);
+        return mixin({}, ...Object
+            .entries(this.environmentVariables)
+            .filter(([key, value]) => {
+            return key === this.variableName || key.startsWith(this.variableName + "__");
+        })
+            .map(([key, value]) => {
+            if (key === this.variableName) {
+                const jsonValue = utils_1.tryParseJson(value);
+                if (typeof jsonValue === "object" && jsonValue !== null && !(jsonValue instanceof Array)) {
+                    return jsonValue;
                 }
-                else if (key.startsWith(this.variableName + "__")) {
-                    objects.push(utils_1.createObjectByPathAndValue(this.keyToPath(key), utils_1.tryParseJson(this.environmentVariables[key])));
-                }
+                throw new ConfigurationSourceError_1.ConfigurationSourceError(`The "${this.variableName}" environment variable must contain an object.`);
             }
-        }
-        return mixin({}, ...objects);
+            return utils_1.createObjectByPathAndValue(this.keyToPath(key), utils_1.tryParseJson(value));
+        }));
     }
     keyToPath(key) {
         const path = key

@@ -23,41 +23,41 @@ export class CommandLineSource implements ConfigurationSourceInterface {
     }
 
     public resolve(): object {
-        const args: any = minimist(
+        const argv: any = minimist(
             this.commandLineArguments,
             { string: this.argumentName },
         );
-        if (args[this.argumentName] === undefined) {
+        if (argv[this.argumentName] === undefined) {
             return {};
         }
 
-        let overrides: string[];
-        if (args[this.argumentName] instanceof Array) {
-            overrides = args[this.argumentName];
+        let values: string[];
+        if (argv[this.argumentName] instanceof Array) {
+            values = argv[this.argumentName];
         } else {
-            overrides = [args[this.argumentName]];
+            values = [argv[this.argumentName]];
         }
 
         return mixin(
             {},
-            ...overrides.map((override: string): object => {
-                if (override === "") {
+            ...values.map((value: string): object => {
+                if (value === "") {
                     throw new ConfigurationSourceError(`One or more "--${this.argumentName}" command line arguments does not define configuration item name.`);
                 }
 
-                const jsonValue: any = tryParseJson(override);
+                const jsonValue: any = tryParseJson(value);
                 if (typeof jsonValue === "object" && jsonValue !== null && !(jsonValue instanceof Array)) {
                     return jsonValue;
                 }
 
-                const index: number = override.indexOf("=");
+                const index: number = value.indexOf("=");
                 if (index === -1) {
                     throw new ConfigurationSourceError(`One or more "--${this.argumentName}" command line arguments does not define configuration item value.`);
                 }
 
                 return createObjectByPathAndValue(
-                    this.keyToPath(override.substr(0, index)),
-                    tryParseJson(override.substr(index + 1)),
+                    this.keyToPath(value.substr(0, index)),
+                    tryParseJson(value.substr(index + 1)),
                 );
             }),
         );

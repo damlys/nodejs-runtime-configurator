@@ -22,26 +22,28 @@ export class EnvironmentVariablesSource implements ConfigurationSourceInterface 
     }
 
     public resolve(): object {
-        const objects: object[] = [];
-        for (const key in this.environmentVariables) {
-            if (this.environmentVariables.hasOwnProperty(key)) {
-                if (key === this.variableName) {
-                    const value: any = tryParseJson(this.environmentVariables[key] as string);
-                    if (typeof value !== "object" || value === null || value instanceof Array) {
+        return mixin(
+            {},
+            ...Object
+                .entries(this.environmentVariables)
+                .filter(([key, value]: [string, string | undefined]): boolean => {
+                    return key === this.variableName || key.startsWith(this.variableName + "__");
+                })
+                .map(([key, value]: [string, string | undefined]): object => {
+                    if (key === this.variableName) {
+                        const jsonValue: any = tryParseJson(value as string);
+                        if (typeof jsonValue === "object" && jsonValue !== null && !(jsonValue instanceof Array)) {
+                            return jsonValue;
+                        }
                         throw new ConfigurationSourceError(`The "${this.variableName}" environment variable must contain an object.`);
                     }
-                    objects.push(value);
-                } else if (key.startsWith(this.variableName + "__")) {
-                    objects.push(
-                        createObjectByPathAndValue(
-                            this.keyToPath(key),
-                            tryParseJson(this.environmentVariables[key] as string),
-                        ),
+
+                    return createObjectByPathAndValue(
+                        this.keyToPath(key),
+                        tryParseJson(value as string),
                     );
-                }
-            }
-        }
-        return mixin({}, ...objects);
+                }),
+        );
     }
 
     private keyToPath(key: string): string[] {

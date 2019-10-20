@@ -15,30 +15,30 @@ class CommandLineSource {
         this.commandLineArguments = commandLineArguments;
     }
     resolve() {
-        const args = minimist(this.commandLineArguments, { string: this.argumentName });
-        if (args[this.argumentName] === undefined) {
+        const argv = minimist(this.commandLineArguments, { string: this.argumentName });
+        if (argv[this.argumentName] === undefined) {
             return {};
         }
-        let overrides;
-        if (args[this.argumentName] instanceof Array) {
-            overrides = args[this.argumentName];
+        let values;
+        if (argv[this.argumentName] instanceof Array) {
+            values = argv[this.argumentName];
         }
         else {
-            overrides = [args[this.argumentName]];
+            values = [argv[this.argumentName]];
         }
-        return mixin({}, ...overrides.map((override) => {
-            if (override === "") {
+        return mixin({}, ...values.map((value) => {
+            if (value === "") {
                 throw new ConfigurationSourceError_1.ConfigurationSourceError(`One or more "--${this.argumentName}" command line arguments does not define configuration item name.`);
             }
-            const jsonValue = utils_1.tryParseJson(override);
+            const jsonValue = utils_1.tryParseJson(value);
             if (typeof jsonValue === "object" && jsonValue !== null && !(jsonValue instanceof Array)) {
                 return jsonValue;
             }
-            const index = override.indexOf("=");
+            const index = value.indexOf("=");
             if (index === -1) {
                 throw new ConfigurationSourceError_1.ConfigurationSourceError(`One or more "--${this.argumentName}" command line arguments does not define configuration item value.`);
             }
-            return utils_1.createObjectByPathAndValue(this.keyToPath(override.substr(0, index)), utils_1.tryParseJson(override.substr(index + 1)));
+            return utils_1.createObjectByPathAndValue(this.keyToPath(value.substr(0, index)), utils_1.tryParseJson(value.substr(index + 1)));
         }));
     }
     keyToPath(key) {

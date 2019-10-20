@@ -103,7 +103,7 @@ test("should process one argument (--change-this)", () => {
         });
 });
 
-test("should handle no override arguments", () => {
+test("should handle no arguments", () => {
     const args: CommandLineArguments = [
         "/bin/node",
         "/app.js",
