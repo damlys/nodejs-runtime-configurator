@@ -30,9 +30,10 @@ test("should return items errors", () => {
     const validator: ConfigurationValidatorInterface = new ObjectValidator({
         alpha: new BooleanValidator(),
         beta: new NumberValidator(true, 0, 10),
+        gamma: undefined,
     });
 
-    expect(validator.validate({ alpha: null, beta: 1 }))
+    expect(validator.validate({ alpha: null, beta: 1, gamma: "whatever" }))
         .toEqual([
             '["alpha"] Value must be a boolean.',
         ]);

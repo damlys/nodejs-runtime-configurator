@@ -1,12 +1,16 @@
 Runtime Configurator
 ===
 
-[![Build Status](https://img.shields.io/travis/damlys/node-runtime-configurator/master?style=flat-square)](https://travis-ci.org/damlys/node-runtime-configurator)
-[![Test Coverage](https://img.shields.io/coveralls/github/damlys/node-runtime-configurator/master?style=flat-square)](https://coveralls.io/github/damlys/node-runtime-configurator)
+[![Build Status](https://img.shields.io/travis/damlys/nodejs-runtime-configurator/master?style=flat-square)](https://travis-ci.org/damlys/nodejs-runtime-configurator)
+[![Test Coverage](https://img.shields.io/coveralls/github/damlys/nodejs-runtime-configurator/master?style=flat-square)](https://coveralls.io/github/damlys/nodejs-runtime-configurator)
 [![NPM Version](https://img.shields.io/npm/v/runtime-configurator?style=flat-square)](https://www.npmjs.com/package/runtime-configurator)
-[![License](https://img.shields.io/github/license/damlys/node-runtime-configurator?style=flat-square)](https://github.com/damlys/node-runtime-configurator/blob/master/LICENSE.md)
+[![License](https://img.shields.io/github/license/damlys/nodejs-runtime-configurator?style=flat-square)](https://github.com/damlys/nodejs-runtime-configurator/blob/master/LICENSE.md)
 
 Painless runtime configuration for Node.js applications.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/damlys/nodejs-runtime-configurator/develop/docs/diagram.svg?sanitize=true">
+</p>
 
 Features:
 
@@ -114,7 +118,8 @@ const configuration: ConfigurationBagInterface =
 5\. Get value from the configuration bag
 
 ```typescript
-const port: number = configuration.get("httpServer.port") as number;
+const port: number =
+    configuration.get("httpServer.port") as number;
 ```
 
 Btw. now you are able to override `httpServer.port` value with:
@@ -128,8 +133,8 @@ Btw. now you are able to override `httpServer.port` value with:
     - `APP__HTTP_SERVER='{"port":1234}'`,
     - `APP='{"httpServer":{"port":1234}}'`,
 - following command line arguments:
-    - `--override=httpServer.port=1234`,
-    - `--override=httpServer='{"port":1234}'`,
+    - `--override=http-server.port=1234`,
+    - `--override=http-server='{"port":1234}'`,
     - `--override='{"httpServer":{"port":1234}}'`.
 
 Enjoy!
@@ -166,8 +171,8 @@ Just checks if value is a boolean.
 new NumberValidator(true, 1, 10)
 ```
 
-Checks if value is an integer, bigger or equal 1
-and smaller or equal 10.
+Checks if value is an integer, bigger than or equal 1
+and smaller than or equal 10.
 
 ###### StringValidator
 
@@ -210,7 +215,7 @@ length of 1 and maximum length of 3.
 new ObjectValidator({ foo: new BooleanValidator() })
 ```
 
-Checks if value is an object and it's `foo` property 
+Checks if value is an object and it's `foo` property
 is a boolean.
 
 ###### Ad-hoc validator
@@ -232,15 +237,15 @@ equal `"0.0.0.0"`.
 ## Examples
 
 There are two runnable examples. One with
-[pure JavaScript](https://github.com/damlys/node-runtime-configurator/tree/master/examples/js-app)
+[pure JavaScript](https://github.com/damlys/nodejs-runtime-configurator/tree/master/examples/js-app)
 and the second one with
-[TypeScript](https://github.com/damlys/node-runtime-configurator/tree/master/examples/ts-app).
+[TypeScript](https://github.com/damlys/nodejs-runtime-configurator/tree/master/examples/ts-app).
 
 ## Development
 
 ```
-$ git clone git@github.com:damlys/node-runtime-configurator.git
-$ cd node-runtime-configurator/
+$ git clone git@github.com:damlys/nodejs-runtime-configurator.git
+$ cd nodejs-runtime-configurator/
 $ npm audit
 $ npm install
 $ npm run build
