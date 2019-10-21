@@ -1,6 +1,11 @@
 Runtime Configurator
 ===
 
+[![Build Status](https://img.shields.io/travis/damlys/node-runtime-configurator/master?style=flat-square)](https://travis-ci.org/damlys/node-runtime-configurator)
+[![Test Coverage](https://img.shields.io/coveralls/github/damlys/node-runtime-configurator/master?style=flat-square)](https://coveralls.io/github/damlys/node-runtime-configurator)
+[![NPM Version](https://img.shields.io/npm/v/runtime-configurator?style=flat-square)](https://www.npmjs.com/package/runtime-configurator)
+[![License](https://img.shields.io/github/license/damlys/node-runtime-configurator?style=flat-square)](https://github.com/damlys/node-runtime-configurator/blob/master/LICENSE.md)
+
 Painless runtime configuration for Node.js applications.
 
 Features:
@@ -236,6 +241,7 @@ and the second one with
 ```
 $ git clone git@github.com:damlys/node-runtime-configurator.git
 $ cd node-runtime-configurator/
+$ npm audit
 $ npm install
 $ npm run build
 $ npm run lint(-fix)
