@@ -51,7 +51,7 @@ test("should handle files that do not exist", () => {
         .toThrow(new ConfigurationSourceError(`The "${filePath}" file is required but does not exist.`));
 });
 
-test("should throws an error if a file does not contain an object", () => {
+test("should throws an error if a file does not contain an literal object", () => {
     for (const value of [
         "array",
         "boolean",
@@ -65,7 +65,7 @@ test("should throws an error if a file does not contain an object", () => {
         const filePath = join(__dirname, "/../__files__/values/" + value + ".js");
         const fileSource: ConfigurationSourceInterface = new FileSource(filePath);
         expect(() => fileSource.resolve())
-            .toThrow(new ConfigurationSourceError(`The "${normalize(filePath)}" file contains ${value} instead of an object.`));
+            .toThrow(new ConfigurationSourceError(`The "${normalize(filePath)}" file must contain contain a literal object.`));
     }
 });
 

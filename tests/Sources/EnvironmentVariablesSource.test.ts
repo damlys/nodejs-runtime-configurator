@@ -69,7 +69,7 @@ test("should throw an error if a top level variable does not contain an object",
         };
         const envsSource: ConfigurationSourceInterface = new EnvironmentVariablesSource("APP", envs);
         expect(() => envsSource.resolve())
-            .toThrow(new ConfigurationSourceError(`The "APP" environment variable must contain an object.`));
+            .toThrow(new ConfigurationSourceError(`The "APP" environment variable must contain a literal object.`));
     }
 });
 

@@ -1,3 +1,6 @@
+// @ts-ignore
+import * as isPlainObject from "is-plain-object/index.cjs.js";
+
 export function createObjectByPathAndValue(path: string[], value: any): object {
     if (path.length === 0) {
         throw new Error("Path can not be empty.");
@@ -13,8 +16,8 @@ export function createObjectByPathAndValue(path: string[], value: any): object {
 }
 
 export function getFromObjectByPath(target: any, path: string[]): any {
-    if (typeof target !== "object" || target === null || target instanceof Array) {
-        throw new Error("Target must be an object.");
+    if (!isPlainObject(target)) {
+        throw new Error("Target must be a literal object.");
     }
     if (path.length === 0) {
         throw new Error("Path can not be empty.");

@@ -1,4 +1,6 @@
 import * as camelCase from "camelcase";
+// @ts-ignore
+import * as isPlainObject from "is-plain-object/index.cjs.js";
 import * as minimist from "minimist";
 // @ts-ignore
 import * as mixin from "mixin-deep";
@@ -47,7 +49,7 @@ export class CommandLineSource implements ConfigurationSourceInterface {
                 }
 
                 const jsonValue: any = tryParseJson(value);
-                if (typeof jsonValue === "object" && jsonValue !== null && !(jsonValue instanceof Array)) {
+                if (isPlainObject(jsonValue)) {
                     return jsonValue;
                 }
 

@@ -30,6 +30,7 @@ Features:
 1. [Usage](#usage)
 1. [Validators](#validators)
 1. [Examples](#examples)
+1. [FAQ](#faq)
 1. [Development](#development)
 
 ## Installation
@@ -240,6 +241,16 @@ There are two runnable examples. One with
 [pure JavaScript](https://github.com/damlys/nodejs-runtime-configurator/tree/master/examples/js-app)
 and the second one with
 [TypeScript](https://github.com/damlys/nodejs-runtime-configurator/tree/master/examples/ts-app).
+
+## FAQ
+
+###### What is a runtime configuration?
+
+Runtime configuration is a
+set of values which vary between application deployments,
+aka. values which we do not know during application development.
+
+See more at [The Twelve-Factor App](https://12factor.net/config).
 
 ## Development
 

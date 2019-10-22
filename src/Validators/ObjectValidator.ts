@@ -1,3 +1,5 @@
+// @ts-ignore
+import * as isPlainObject from "is-plain-object/index.cjs.js";
 import { ConfigurationValidatorInterface } from "./ConfigurationValidatorInterface";
 
 interface ObjectOfConfigurationValidators {
@@ -12,8 +14,8 @@ export class ObjectValidator implements ConfigurationValidatorInterface {
     }
 
     public validate(object: any): string[] {
-        if (typeof object !== "object" || object === null || object instanceof Array) {
-            return ["Value must be an object."];
+        if (!isPlainObject(object)) {
+            return ["Value must be a literal object."];
         }
 
         const errors: string[] = [];

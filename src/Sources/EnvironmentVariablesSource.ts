@@ -1,5 +1,7 @@
 import * as camelCase from "camelcase";
 // @ts-ignore
+import * as isPlainObject from "is-plain-object/index.cjs.js";
+// @ts-ignore
 import * as mixin from "mixin-deep";
 import { createObjectByPathAndValue, tryParseJson } from "../utils";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
@@ -35,10 +37,10 @@ export class EnvironmentVariablesSource implements ConfigurationSourceInterface 
                 .map((key: string): object => {
                     if (key === this.variableName) {
                         const jsonValue: any = tryParseJson(this.environmentVariables[key] as string);
-                        if (typeof jsonValue === "object" && jsonValue !== null && !(jsonValue instanceof Array)) {
+                        if (isPlainObject(jsonValue)) {
                             return jsonValue;
                         }
-                        throw new ConfigurationSourceError(`The "${this.variableName}" environment variable must contain an object.`);
+                        throw new ConfigurationSourceError(`The "${this.variableName}" environment variable must contain a literal object.`);
                     }
 
                     return createObjectByPathAndValue(

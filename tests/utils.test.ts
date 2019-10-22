@@ -24,9 +24,10 @@ test("getFromObjectByPath", () => {
         "",
         Symbol("whatever"),
         [],
+        new Map(),
     ]) {
         expect(() => getFromObjectByPath(value, ["alpha"]))
-            .toThrow(new Error("Target must be an object."));
+            .toThrow(new Error("Target must be a literal object."));
     }
 
     const target: any = {

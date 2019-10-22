@@ -20,9 +20,10 @@ test("should pass only objects", () => {
         "",
         Symbol("whatever"),
         [],
+        new Map(),
     ]) {
         expect(validator.validate(value))
-            .toEqual(["Value must be an object."]);
+            .toEqual(["Value must be a literal object."]);
     }
 });
 

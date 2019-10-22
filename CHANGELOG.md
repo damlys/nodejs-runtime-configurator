@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support Node v6 and v8.
 
+### Changed
+
+- Allow to resolve only literal objects.
+
 ## [1.1.0] - 2019-10-20
 
 ### Added

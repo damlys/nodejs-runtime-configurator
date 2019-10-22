@@ -1,4 +1,6 @@
 import { existsSync, statSync } from "fs";
+// @ts-ignore
+import * as isPlainObject from "is-plain-object/index.cjs.js";
 import { isAbsolute, normalize } from "path";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
@@ -36,14 +38,8 @@ export class FileSource implements ConfigurationSourceInterface {
         }
 
         const result = require(this.filePath);
-        if (result instanceof Array) {
-            throw new ConfigurationSourceError(`The "${normalize(this.filePath)}" file contains array instead of an object.`);
-        }
-        if (result === null) {
-            throw new ConfigurationSourceError(`The "${normalize(this.filePath)}" file contains null instead of an object.`);
-        }
-        if (typeof result !== "object") {
-            throw new ConfigurationSourceError(`The "${normalize(this.filePath)}" file contains ${typeof result} instead of an object.`);
+        if (!isPlainObject(result)) {
+            throw new ConfigurationSourceError(`The "${normalize(this.filePath)}" file must contain contain a literal object.`);
         }
         if (this.filePath.endsWith(".js")) {
             this.executeFunctions(result);
