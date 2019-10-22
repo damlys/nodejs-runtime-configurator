@@ -28,13 +28,13 @@ export class EnvironmentVariablesSource implements ConfigurationSourceInterface 
         return mixin(
             {},
             ...Object
-                .entries(this.environmentVariables)
-                .filter(([key, value]: [string, string | undefined]): boolean => {
+                .keys(this.environmentVariables)
+                .filter((key: string): boolean => {
                     return key === this.variableName || key.startsWith(this.variableName + "__");
                 })
-                .map(([key, value]: [string, string | undefined]): object => {
+                .map((key: string): object => {
                     if (key === this.variableName) {
-                        const jsonValue: any = tryParseJson(value as string);
+                        const jsonValue: any = tryParseJson(this.environmentVariables[key] as string);
                         if (typeof jsonValue === "object" && jsonValue !== null && !(jsonValue instanceof Array)) {
                             return jsonValue;
                         }
@@ -43,7 +43,7 @@ export class EnvironmentVariablesSource implements ConfigurationSourceInterface 
 
                     return createObjectByPathAndValue(
                         this.keyToPath(key),
-                        tryParseJson(value as string),
+                        tryParseJson(this.environmentVariables[key] as string),
                     );
                 }),
         );

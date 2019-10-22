@@ -19,12 +19,12 @@ export class ObjectValidator implements ConfigurationValidatorInterface {
         const errors: string[] = [];
 
         Object
-            .entries(this.validators)
-            .forEach(([key, validator]: [string, ConfigurationValidatorInterface | undefined]): void => {
-                if (validator === undefined) {
+            .keys(this.validators)
+            .forEach((key: string): void => {
+                if (this.validators[key] === undefined) {
                     return;
                 }
-                validator
+                (this.validators[key] as ConfigurationValidatorInterface)
                     .validate(object[key])
                     .forEach((error) => {
                         errors.push(`["${key}"] ${error}`);

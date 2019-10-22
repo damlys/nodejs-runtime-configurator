@@ -35,12 +35,13 @@ export class DirectorySource implements ConfigurationSourceInterface {
         }
 
         return new SourcesAggregator(
-            readdirSync(this.directoryPath, { withFileTypes: true })
+            readdirSync(this.directoryPath)
                 .filter((value) => {
-                    return value.isFile() && (value.name.endsWith(".json") || value.name.endsWith(".js"));
+                    const elementStats = statSync(join(this.directoryPath, value));
+                    return elementStats.isFile() && (value.endsWith(".json") || value.endsWith(".js"));
                 })
                 .map((value) => {
-                    return new FileSource(join(this.directoryPath, value.name));
+                    return new FileSource(join(this.directoryPath, value));
                 }),
         ).resolve();
     }
