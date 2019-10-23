@@ -1,5 +1,4 @@
-// @ts-ignore
-import * as isPlainObject from "is-plain-object/index.cjs.js";
+import isPlainObject from "is-plain-object";
 import { ConfigurationValidatorInterface } from "./ConfigurationValidatorInterface";
 
 interface ObjectOfConfigurationValidators {

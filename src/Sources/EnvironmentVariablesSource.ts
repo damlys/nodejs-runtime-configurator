@@ -1,8 +1,7 @@
-import * as camelCase from "camelcase";
+import camelCase from "camelcase";
+import isPlainObject from "is-plain-object";
 // @ts-ignore
-import * as isPlainObject from "is-plain-object/index.cjs.js";
-// @ts-ignore
-import * as mixin from "mixin-deep";
+import mixinDeep from "mixin-deep";
 import { createObjectByPathAndValue, tryParseJson } from "../utils";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
@@ -27,7 +26,7 @@ export class EnvironmentVariablesSource implements ConfigurationSourceInterface 
     }
 
     public resolve(): object {
-        return mixin(
+        return mixinDeep(
             {},
             ...Object
                 .keys(this.environmentVariables)

@@ -1,9 +1,8 @@
-import * as camelCase from "camelcase";
+import camelCase from "camelcase";
+import isPlainObject from "is-plain-object";
+import minimist from "minimist";
 // @ts-ignore
-import * as isPlainObject from "is-plain-object/index.cjs.js";
-import * as minimist from "minimist";
-// @ts-ignore
-import * as mixin from "mixin-deep";
+import mixinDeep from "mixin-deep";
 import { createObjectByPathAndValue, tryParseJson } from "../utils";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
@@ -41,7 +40,7 @@ export class CommandLineSource implements ConfigurationSourceInterface {
             values = [argv[this.argumentName]];
         }
 
-        return mixin(
+        return mixinDeep(
             {},
             ...values.map((value: string): object => {
                 if (value === "") {

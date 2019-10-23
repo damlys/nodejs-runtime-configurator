@@ -1,5 +1,5 @@
 // @ts-ignore
-import * as deepFreeze from "deep-freeze";
+import deepFreeze from "deep-freeze";
 import { ConfigurationValidatorInterface } from "../Validators/ConfigurationValidatorInterface";
 import { ConfigurationItemInterface } from "./ConfigurationItemInterface";
 

@@ -1,4 +1,4 @@
-import * as cliTable3 from "cli-table3";
+import cliTable3 from "cli-table3";
 import { ConfigurationItemInterface } from "../Schema/ConfigurationItemInterface";
 import { ConfigurationPrinterInterface } from "./ConfigurationPrinterInterface";
 

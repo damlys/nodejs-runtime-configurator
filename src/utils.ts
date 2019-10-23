@@ -1,5 +1,4 @@
-// @ts-ignore
-import * as isPlainObject from "is-plain-object/index.cjs.js";
+import isPlainObject from "is-plain-object";
 
 export function createObjectByPathAndValue(path: string[], value: any): object {
     if (path.length === 0) {

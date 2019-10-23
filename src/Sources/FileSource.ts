@@ -1,6 +1,5 @@
 import { existsSync, statSync } from "fs";
-// @ts-ignore
-import * as isPlainObject from "is-plain-object/index.cjs.js";
+import isPlainObject from "is-plain-object";
 import { isAbsolute, normalize } from "path";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";

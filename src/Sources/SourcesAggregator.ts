@@ -1,5 +1,5 @@
 // @ts-ignore
-import * as mixin from "mixin-deep";
+import mixinDeep from "mixin-deep";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
 
 export class SourcesAggregator implements ConfigurationSourceInterface {
@@ -10,7 +10,7 @@ export class SourcesAggregator implements ConfigurationSourceInterface {
     }
 
     public resolve(): object {
-        return mixin(
+        return mixinDeep(
             {},
             ...this.sources.map(
                 (source: ConfigurationSourceInterface) => source.resolve(),
