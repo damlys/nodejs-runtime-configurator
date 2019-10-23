@@ -9,7 +9,7 @@ import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
 
 type CommandLineArguments = string[];
 
-export class CommandLineSource implements ConfigurationSourceInterface {
+export class CommandLineArgumentsSource implements ConfigurationSourceInterface {
     private readonly argumentName: string;
     private readonly commandLineArguments: CommandLineArguments;
 

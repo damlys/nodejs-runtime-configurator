@@ -7,7 +7,7 @@ export * from "./Schema/ConfigurationItem";
 export * from "./Schema/ConfigurationItemInterface";
 export * from "./Schema/ConfigurationSchemaError";
 
-export * from "./Sources/CommandLineSource";
+export * from "./Sources/CommandLineArgumentsSource";
 export * from "./Sources/ConfigurationSourceError";
 export * from "./Sources/ConfigurationSourceInterface";
 export * from "./Sources/DirectorySource";

@@ -8,7 +8,7 @@ test("should export package stuff", () => {
     expect(index).toHaveProperty("ConfigurationItem");
     expect(index).toHaveProperty("ConfigurationSchemaError");
 
-    expect(index).toHaveProperty("CommandLineSource");
+    expect(index).toHaveProperty("CommandLineArgumentsSource");
     expect(index).toHaveProperty("ConfigurationSourceError");
     expect(index).toHaveProperty("DirectorySource");
     expect(index).toHaveProperty("EnvironmentVariablesSource");

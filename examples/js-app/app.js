@@ -4,7 +4,7 @@ const {
   ArrayValidator,
   BooleanValidator,
   CommandLinePrinter,
-  CommandLineSource,
+  CommandLineArgumentsSource,
   ConfigurationBag,
   ConfigurationItem,
   DirectorySource,
@@ -93,7 +93,7 @@ const configuration = new ConfigurationBag(
     new FileSource(path.join(os.homedir(), ".app.json"), false),
 
     new EnvironmentVariablesSource("APP", process.env),
-    new CommandLineSource("override", process.argv),
+    new CommandLineArgumentsSource("override", process.argv),
   ],
 );
 

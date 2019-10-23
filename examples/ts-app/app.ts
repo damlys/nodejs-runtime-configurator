@@ -3,8 +3,8 @@ import path from "path";
 import {
     ArrayValidator,
     BooleanValidator,
+    CommandLineArgumentsSource,
     CommandLinePrinter,
-    CommandLineSource,
     ConfigurationBag,
     ConfigurationBagInterface,
     ConfigurationItem,
@@ -94,7 +94,7 @@ const configuration: ConfigurationBagInterface = new ConfigurationBag(
         new FileSource(path.join(os.homedir(), ".app.json"), false),
 
         new EnvironmentVariablesSource("APP", process.env),
-        new CommandLineSource("override", process.argv),
+        new CommandLineArgumentsSource("override", process.argv),
     ],
 );
 

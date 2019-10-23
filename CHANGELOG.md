@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Do not use `process.argv`, `process.env` and `process.stdout.columns` as default parameters values.
+- Rename `CommandLineSource` to `CommandLineArgumentsSource`.
 
 ### Fixed
 
