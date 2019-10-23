@@ -1,7 +1,7 @@
 import "jest";
 import stripAnsi from "strip-ansi";
-import { CommandLinePrinter } from "../../src/Printers/CommandLinePrinter";
 import { ConfigurationPrinterInterface } from "../../src/Printers/ConfigurationPrinterInterface";
+import { StandardOutputPrinter } from "../../src/Printers/StandardOutputPrinter";
 import { ConfigurationItem } from "../../src/Schema/ConfigurationItem";
 import { ConfigurationItemInterface } from "../../src/Schema/ConfigurationItemInterface";
 
@@ -12,7 +12,7 @@ test("should be able to render table", () => {
     ];
     items[0].setValue(1);
 
-    const printer: ConfigurationPrinterInterface = new CommandLinePrinter(97);
+    const printer: ConfigurationPrinterInterface = new StandardOutputPrinter(97);
 
     expect(
         stripAnsi(
@@ -36,7 +36,7 @@ test("should print rendered table to console", () => {
         new ConfigurationItem("foo", "Foo.", 0),
     ];
 
-    const printer: ConfigurationPrinterInterface = new CommandLinePrinter(100);
+    const printer: ConfigurationPrinterInterface = new StandardOutputPrinter(100);
     printer.render = (i: ConfigurationItemInterface[]): string => {
         return "render result";
     };

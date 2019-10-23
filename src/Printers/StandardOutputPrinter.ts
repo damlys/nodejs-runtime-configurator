@@ -2,7 +2,7 @@ import cliTable3 from "cli-table3";
 import { ConfigurationItemInterface } from "../Schema/ConfigurationItemInterface";
 import { ConfigurationPrinterInterface } from "./ConfigurationPrinterInterface";
 
-export class CommandLinePrinter implements ConfigurationPrinterInterface {
+export class StandardOutputPrinter implements ConfigurationPrinterInterface {
     private readonly tableWidth: number;
 
     public constructor(tableWidth: number) {

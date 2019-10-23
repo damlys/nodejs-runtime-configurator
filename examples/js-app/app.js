@@ -3,7 +3,6 @@ const path = require("path");
 const {
   ArrayValidator,
   BooleanValidator,
-  CommandLinePrinter,
   CommandLineArgumentsSource,
   ConfigurationBag,
   ConfigurationItem,
@@ -11,6 +10,7 @@ const {
   EnvironmentVariablesSource,
   FileSource,
   NumberValidator,
+  StandardOutputPrinter,
   StringValidator,
 } = require("../../dist");
 
@@ -98,7 +98,7 @@ const configuration = new ConfigurationBag(
 );
 
 if (process.argv.includes("--print-config")) {
-  configuration.print(new CommandLinePrinter(process.stdout.columns));
+  configuration.print(new StandardOutputPrinter(process.stdout.columns));
   process.exit(0);
 }
 

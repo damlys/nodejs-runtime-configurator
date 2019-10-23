@@ -4,7 +4,6 @@ import {
     ArrayValidator,
     BooleanValidator,
     CommandLineArgumentsSource,
-    CommandLinePrinter,
     ConfigurationBag,
     ConfigurationBagInterface,
     ConfigurationItem,
@@ -12,6 +11,7 @@ import {
     EnvironmentVariablesSource,
     FileSource,
     NumberValidator,
+    StandardOutputPrinter,
     StringValidator,
 } from "../../src";
 
@@ -99,7 +99,7 @@ const configuration: ConfigurationBagInterface = new ConfigurationBag(
 );
 
 if (process.argv.includes("--print-config")) {
-    configuration.print(new CommandLinePrinter(process.stdout.columns));
+    configuration.print(new StandardOutputPrinter(process.stdout.columns));
     process.exit(0);
 }
 

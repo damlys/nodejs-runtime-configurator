@@ -66,7 +66,7 @@ import {
     FileSource,
 
     ConfigurationPrinterInterface,
-    CommandLinePrinter
+    StandardOutputPrinter
 } from "runtime-configurator";
 ```
 

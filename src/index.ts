@@ -1,5 +1,5 @@
-export * from "./Printers/CommandLinePrinter";
 export * from "./Printers/ConfigurationPrinterInterface";
+export * from "./Printers/StandardOutputPrinter";
 
 export * from "./Schema/ConfigurationBag";
 export * from "./Schema/ConfigurationBagInterface";
