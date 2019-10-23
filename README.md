@@ -96,11 +96,11 @@ const sources: ConfigurationSourceInterface[] = [
     new DirectorySource("/etc/app", false),
     new FileSource("/etc/app.json", false),
 
-    new DirectorySource(join(homedir(), "/.app"), false),
-    new FileSource(join(homedir(), "/.app.json"), false),
+    new DirectorySource(path.join(os.homedir(), ".app"), false),
+    new FileSource(path.join(os.homedir(), ".app.json"), false),
 
-    new EnvironmentVariablesSource("APP"),
-    new CommandLineSource("override")
+    new EnvironmentVariablesSource("APP", process.env),
+    new CommandLineSource("override", process.argv)
 ];
 ```
 

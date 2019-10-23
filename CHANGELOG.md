@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Do not use `process.argv`, `process.env` and `process.stdout.columns` as default parameters values.
+
 ### Fixed
 
 - Turn on TypeScript `esModuleInterop` option.

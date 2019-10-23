@@ -15,8 +15,8 @@ export class EnvironmentVariablesSource implements ConfigurationSourceInterface 
     private readonly environmentVariables: EnvironmentVariables;
 
     public constructor(
-        variableName: string = "APP",
-        environmentVariables: EnvironmentVariables = process.env,
+        variableName: string,
+        environmentVariables: EnvironmentVariables,
     ) {
         if (variableName === "") {
             throw new ConfigurationSourceError("The environment variable name can not be empty.");

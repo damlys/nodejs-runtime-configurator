@@ -14,8 +14,8 @@ export class CommandLineSource implements ConfigurationSourceInterface {
     private readonly commandLineArguments: CommandLineArguments;
 
     public constructor(
-        argumentName: string = "override",
-        commandLineArguments: CommandLineArguments = process.argv,
+        argumentName: string,
+        commandLineArguments: CommandLineArguments,
     ) {
         if (argumentName === "") {
             throw new ConfigurationSourceError("The command line argument name can not be empty.");

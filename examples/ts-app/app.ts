@@ -1,4 +1,5 @@
-import { join } from "path";
+import os from "os";
+import path from "path";
 import {
     ArrayValidator,
     BooleanValidator,
@@ -83,17 +84,22 @@ const configuration: ConfigurationBagInterface = new ConfigurationBag(
         ),
     ],
     [
-        new DirectorySource(join(__dirname, "/configs")),
-        new FileSource(join(__dirname, "/config.json")),
+        new DirectorySource(path.join(__dirname, "configs")),
+        new FileSource(path.join(__dirname, "config.json")),
+
         new DirectorySource("/etc/app", false),
         new FileSource("/etc/app.json", false),
-        new EnvironmentVariablesSource("APP"),
-        new CommandLineSource("override"),
+
+        new DirectorySource(path.join(os.homedir(), ".app"), false),
+        new FileSource(path.join(os.homedir(), ".app.json"), false),
+
+        new EnvironmentVariablesSource("APP", process.env),
+        new CommandLineSource("override", process.argv),
     ],
 );
 
 if (process.argv.includes("--print-config")) {
-    configuration.print(new CommandLinePrinter());
+    configuration.print(new CommandLinePrinter(process.stdout.columns));
     process.exit(0);
 }
 

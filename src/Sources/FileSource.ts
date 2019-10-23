@@ -47,15 +47,15 @@ export class FileSource implements ConfigurationSourceInterface {
     }
 
     private executeFunctions(object: any): void {
-        for (const key in object) {
-            if (object.hasOwnProperty(key)) {
+        Object
+            .keys(object)
+            .forEach((key: string): void => {
                 while (typeof object[key] === "function") {
                     object[key] = object[key]();
                 }
                 if (typeof object[key] === "object" && object[key] !== null) {
                     this.executeFunctions(object[key]);
                 }
-            }
-        }
+            });
     }
 }

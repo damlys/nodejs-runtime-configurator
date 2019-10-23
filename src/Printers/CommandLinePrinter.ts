@@ -5,7 +5,7 @@ import { ConfigurationPrinterInterface } from "./ConfigurationPrinterInterface";
 export class CommandLinePrinter implements ConfigurationPrinterInterface {
     private readonly tableWidth: number;
 
-    public constructor(tableWidth: number = process.stdout.columns) {
+    public constructor(tableWidth: number) {
         this.tableWidth = tableWidth;
     }
 
