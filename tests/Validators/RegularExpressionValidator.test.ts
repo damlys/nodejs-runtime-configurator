@@ -25,7 +25,7 @@ test("should pass only strings", () => {
 });
 
 test("should test value with regular expression", () => {
-    const primitiveEmailRegExp = /\S+@\S+\.\S+/;
+    const primitiveEmailRegExp: RegExp = /\S+@\S+\.\S+/;
     const emailValidator: ConfigurationValidatorInterface = new RegularExpressionValidator(primitiveEmailRegExp);
 
     expect(emailValidator.validate("abc"))

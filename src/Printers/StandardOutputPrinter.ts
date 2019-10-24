@@ -14,15 +14,15 @@ export class StandardOutputPrinter implements ConfigurationPrinterInterface {
         const columnWidth: number = Math.floor(this.tableWidth / columnsCount);
         const restColumnWidth: number = this.tableWidth - columnsCount - 1 - (columnWidth * (columnsCount - 1));
 
-        const table = new cliTable3({
+        const table: cliTable3.Table = new cliTable3({
             style: {
                 head: ["bold"],
             },
             head: [
                 "Key",
                 "Description",
-                "Value",
                 "Default value",
+                "Value",
             ],
             colWidths: [
                 columnWidth,
@@ -34,13 +34,13 @@ export class StandardOutputPrinter implements ConfigurationPrinterInterface {
         }) as cliTable3.HorizontalTable;
 
         for (const item of items) {
-            const value = JSON.stringify(item.getValue(), null, 2);
-            const defaultValue = JSON.stringify(item.getDefaultValue(), null, 2);
+            const defaultValue: string = JSON.stringify(item.getDefaultValue(), null, 2);
+            const value: string = JSON.stringify(item.getValue(), null, 2);
             table.push([
                 item.getKey(),
                 item.getDescription(),
-                value === defaultValue ? "~" : value,
                 defaultValue,
+                value === defaultValue ? "~" : value,
             ]);
         }
 

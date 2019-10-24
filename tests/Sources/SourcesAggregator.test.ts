@@ -11,7 +11,7 @@ test("should aggregate zero sources", () => {
 test("should aggregate one source", () => {
     const sourcesAggregator: ConfigurationSourceInterface = new SourcesAggregator([
         {
-            resolve: () => {
+            resolve: (): object => {
                 return { alpha: true };
             },
         },
@@ -23,7 +23,7 @@ test("should aggregate one source", () => {
 test("should aggregate many sources", () => {
     const sourcesAggregator: ConfigurationSourceInterface = new SourcesAggregator([
         {
-            resolve: () => {
+            resolve: (): object => {
                 return {
                     alpha: {
                         beta: {
@@ -39,7 +39,7 @@ test("should aggregate many sources", () => {
             },
         },
         {
-            resolve: () => {
+            resolve: (): object => {
                 return {
                     alpha: {
                         beta: {
@@ -57,7 +57,7 @@ test("should aggregate many sources", () => {
             },
         },
         {
-            resolve: () => {
+            resolve: (): object => {
                 return {
                     alpha: {
                         omega: 1,

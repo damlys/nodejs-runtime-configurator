@@ -1,20 +1,20 @@
 import "jest";
-import { CommandLineArgumentsSource } from "../../src/Sources/CommandLineArgumentsSource";
+import { CommandLineArguments, CommandLineArgumentsSource } from "../../src/Sources/CommandLineArgumentsSource";
 import { ConfigurationSourceError } from "../../src/Sources/ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "../../src/Sources/ConfigurationSourceInterface";
 
 test("should check if an argument name is not empty", () => {
-    const args = [
+    const args: CommandLineArguments = [
         "/bin/node",
         "/app.js",
         "run",
     ];
-    expect(() => new CommandLineArgumentsSource("", args))
+    expect(() => new CommandLineArgumentsSource(args, ""))
         .toThrow(new ConfigurationSourceError("The command line argument name can not be empty."));
 });
 
 test("should process override arguments", () => {
-    const args = [
+    const args: CommandLineArguments = [
         "/bin/node",
         "/app.js",
         "--override={\"top1\":       \"level1\"}",
@@ -40,7 +40,7 @@ test("should process override arguments", () => {
         "--override",
         "zeta=eta",
     ];
-    const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource("override", args);
+    const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource(args, "override");
     expect(cliSource.resolve())
         .toEqual({
             top1: "level1",
@@ -72,7 +72,7 @@ test("should throw an error if argument is invalid", () => {
         ["/bin/node", "/app.js", "--override=", "--whatever"],
         ["/bin/node", "/app.js", "--override", "--whatever"],
     ]) {
-        const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource("override", args);
+        const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource(args, "override");
         expect(() => cliSource.resolve())
             .toThrow(new ConfigurationSourceError(`One or more "--override" command line arguments does not define configuration item name.`));
     }
@@ -81,21 +81,21 @@ test("should throw an error if argument is invalid", () => {
         ["/bin/node", "/app.js", "--override=whatever"],
         ["/bin/node", "/app.js", "--override", "whatever"],
     ]) {
-        const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource("override", args);
+        const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource(args, "override");
         expect(() => cliSource.resolve())
             .toThrow(new ConfigurationSourceError(`One or more "--override" command line arguments does not define configuration item value.`));
     }
 });
 
 test("should process one argument (--change-this)", () => {
-    const args = [
+    const args: CommandLineArguments = [
         "/bin/node",
         "/app.js",
         "--change-this=alpha=beta",
         "--override=epsilon=zeta",
         "run",
     ];
-    const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource("change-this", args);
+    const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource(args, "change-this");
     expect(cliSource.resolve())
         .toEqual({
             alpha: "beta",
@@ -103,12 +103,12 @@ test("should process one argument (--change-this)", () => {
 });
 
 test("should handle no arguments", () => {
-    const args = [
+    const args: CommandLineArguments = [
         "/bin/node",
         "/app.js",
         "run",
     ];
-    const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource("override", args);
+    const cliSource: ConfigurationSourceInterface = new CommandLineArgumentsSource(args, "override");
     expect(cliSource.resolve())
         .toEqual({});
 });

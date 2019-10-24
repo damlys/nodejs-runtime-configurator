@@ -11,24 +11,24 @@ Error: Some of configuration items are invalid:
 ```
 $ APP__DATA_STORAGE__AUTO_RECONNECT="true" ts-node ./examples/ts-app/app.ts --override=dataStorage.databaseName=thedb --print-config
 ┌───────────────────────────────────────┬────────────────────────────────────┬───────────────────────────────────────┬───────────────────────────────────────┐
-│ Key                                   │ Description                        │ Value                                 │ Default value                         │
+│ Key                                   │ Description                        │ Default value                         │ Value                                 │
 ├───────────────────────────────────────┼────────────────────────────────────┼───────────────────────────────────────┼───────────────────────────────────────┤
-│ dataStorage.host                      │ MySQL host.                        │ "192.168.1.100"                       │ "127.0.0.1"                           │
+│ dataStorage.host                      │ MySQL host.                        │ "127.0.0.1"                           │ "192.168.1.100"                       │
 ├───────────────────────────────────────┼────────────────────────────────────┼───────────────────────────────────────┼───────────────────────────────────────┤
-│ dataStorage.port                      │ MySQL port.                        │ ~                                     │ 3306                                  │
+│ dataStorage.port                      │ MySQL port.                        │ 3306                                  │ ~                                     │
 ├───────────────────────────────────────┼────────────────────────────────────┼───────────────────────────────────────┼───────────────────────────────────────┤
-│ dataStorage.username                  │ MySQL username.                    │ "theuser"                             │ "user0"                               │
+│ dataStorage.username                  │ MySQL username.                    │ "user0"                               │ "theuser"                             │
 ├───────────────────────────────────────┼────────────────────────────────────┼───────────────────────────────────────┼───────────────────────────────────────┤
-│ dataStorage.password                  │ MySQL password.                    │ "Secret123"                           │ ""                                    │
+│ dataStorage.password                  │ MySQL password.                    │ ""                                    │ "Secret123"                           │
 ├───────────────────────────────────────┼────────────────────────────────────┼───────────────────────────────────────┼───────────────────────────────────────┤
-│ dataStorage.databaseName              │ MySQL database name.               │ "thedb"                               │ "db0"                                 │
+│ dataStorage.databaseName              │ MySQL database name.               │ "db0"                                 │ "thedb"                               │
 ├───────────────────────────────────────┼────────────────────────────────────┼───────────────────────────────────────┼───────────────────────────────────────┤
-│ dataStorage.autoReconnect             │ Enables or disables auto           │ true                                  │ false                                 │
+│ dataStorage.autoReconnect             │ Enables or disables auto           │ false                                 │ true                                  │
 │                                       │ reconnect.                         │                                       │                                       │
 ├───────────────────────────────────────┼────────────────────────────────────┼───────────────────────────────────────┼───────────────────────────────────────┤
 │ mailer.replyToAddresses               │ SMTP Reply-To header value.        │ [                                     │ [                                     │
-│                                       │                                    │   "bob@example.tld"                   │   "support@example.tld",              │
-│                                       │                                    │ ]                                     │   "admin@example.tld"                 │
-│                                       │                                    │                                       │ ]                                     │
+│                                       │                                    │   "support@example.tld",              │   "bob@example.tld"                   │
+│                                       │                                    │   "admin@example.tld"                 │ ]                                     │
+│                                       │                                    │ ]                                     │                                       │
 └───────────────────────────────────────┴────────────────────────────────────┴───────────────────────────────────────┴───────────────────────────────────────┘
 ```

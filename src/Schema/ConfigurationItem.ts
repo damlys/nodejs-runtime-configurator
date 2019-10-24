@@ -52,7 +52,7 @@ export class ConfigurationItem implements ConfigurationItemInterface {
         for (const validator of this.validators) {
             validator
                 .validate(value)
-                .forEach((error) => {
+                .forEach((error: string): void => {
                     errors.push(error);
                 });
         }

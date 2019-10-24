@@ -13,14 +13,14 @@ export class EnumerableValidator implements ConfigurationValidatorInterface {
 
     public validate(value: any): string[] {
         if (!this.values.includes(value)) {
-            return [`Value must equal one of the following: ${this.stringifyValues()}.`];
+            return [`Value must equal one of the following: ${this.getStringifiedValues()}.`];
         }
         return [];
     }
 
-    private stringifyValues(): string {
+    private getStringifiedValues(): string {
         return this.values
-            .map((value) => JSON.stringify(value))
+            .map((value: any): string => JSON.stringify(value))
             .join(", ");
     }
 }

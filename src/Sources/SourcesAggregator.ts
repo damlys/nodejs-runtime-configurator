@@ -12,9 +12,8 @@ export class SourcesAggregator implements ConfigurationSourceInterface {
     public resolve(): object {
         return mixinDeep(
             {},
-            ...this.sources.map(
-                (source: ConfigurationSourceInterface) => source.resolve(),
-            ),
+            ...this.sources
+                .map((source: ConfigurationSourceInterface): object => source.resolve()),
         );
     }
 }

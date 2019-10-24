@@ -1,7 +1,7 @@
 import isPlainObject from "is-plain-object";
 import { ConfigurationValidatorInterface } from "./ConfigurationValidatorInterface";
 
-interface ObjectOfConfigurationValidators {
+export interface ObjectOfConfigurationValidators {
     [key: string]: ConfigurationValidatorInterface | undefined;
 }
 
@@ -27,7 +27,7 @@ export class ObjectValidator implements ConfigurationValidatorInterface {
                 }
                 (this.validators[key] as ConfigurationValidatorInterface)
                     .validate(object[key])
-                    .forEach((error) => {
+                    .forEach((error: string): void => {
                         errors.push(`["${key}"] ${error}`);
                     });
             });

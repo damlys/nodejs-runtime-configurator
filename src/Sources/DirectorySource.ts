@@ -1,5 +1,5 @@
-import { existsSync, readdirSync, statSync } from "fs";
-import { isAbsolute, join, normalize } from "path";
+import { existsSync, readdirSync, Stats, statSync } from "fs";
+import { extname, isAbsolute, join, normalize } from "path";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
 import { FileSource } from "./FileSource";
@@ -29,18 +29,18 @@ export class DirectorySource implements ConfigurationSourceInterface {
             }
         }
 
-        const stats = statSync(this.directoryPath);
+        const stats: Stats = statSync(this.directoryPath);
         if (!stats.isDirectory()) {
             throw new ConfigurationSourceError(`The "${normalize(this.directoryPath)}" path does not point to a directory.`);
         }
 
         return new SourcesAggregator(
             readdirSync(this.directoryPath)
-                .filter((value) => {
-                    const elementStats = statSync(join(this.directoryPath, value));
-                    return elementStats.isFile() && (value.endsWith(".json") || value.endsWith(".js"));
+                .filter((value: string): boolean => {
+                    const elementStats: Stats = statSync(join(this.directoryPath, value));
+                    return elementStats.isFile() && (extname(value) === ".json" || extname(value) === ".js");
                 })
-                .map((value) => {
+                .map((value: string): ConfigurationSourceInterface => {
                     return new FileSource(join(this.directoryPath, value));
                 }),
         ).resolve();

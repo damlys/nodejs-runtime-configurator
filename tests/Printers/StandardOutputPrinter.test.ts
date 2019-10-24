@@ -5,7 +5,7 @@ import { StandardOutputPrinter } from "../../src/Printers/StandardOutputPrinter"
 import { ConfigurationItem } from "../../src/Schema/ConfigurationItem";
 import { ConfigurationItemInterface } from "../../src/Schema/ConfigurationItemInterface";
 
-test("should be able to render table", () => {
+test("should be able to render a table", () => {
     const items: ConfigurationItemInterface[] = [
         new ConfigurationItem("foo", "Foo.", 0),
         new ConfigurationItem("bar", "Bar.", ["whatever"]),
@@ -20,32 +20,32 @@ test("should be able to render table", () => {
         ),
     ).toBe(
         `┌────────────────────────┬────────────────────┬────────────────────────┬────────────────────────┐
-│ Key                    │ Description        │ Value                  │ Default value          │
+│ Key                    │ Description        │ Default value          │ Value                  │
 ├────────────────────────┼────────────────────┼────────────────────────┼────────────────────────┤
-│ foo                    │ Foo.               │ 1                      │ 0                      │
+│ foo                    │ Foo.               │ 0                      │ 1                      │
 ├────────────────────────┼────────────────────┼────────────────────────┼────────────────────────┤
-│ bar                    │ Bar.               │ ~                      │ [                      │
-│                        │                    │                        │   "whatever"           │
-│                        │                    │                        │ ]                      │
+│ bar                    │ Bar.               │ [                      │ ~                      │
+│                        │                    │   "whatever"           │                        │
+│                        │                    │ ]                      │                        │
 └────────────────────────┴────────────────────┴────────────────────────┴────────────────────────┘`,
     );
 });
 
-test("should print rendered table to console", () => {
+test("should print rendered table to the standard output", () => {
     const items: ConfigurationItemInterface[] = [
         new ConfigurationItem("foo", "Foo.", 0),
     ];
 
     const printer: ConfigurationPrinterInterface = new StandardOutputPrinter(100);
     printer.render = (i: ConfigurationItemInterface[]): string => {
-        return "render result";
+        return "the-render-result";
     };
 
-    const renderSpy = jest.spyOn(printer, "render");
-    const logSpy = jest.spyOn(console, "log").mockImplementation();
+    const renderSpy: any = jest.spyOn(printer, "render");
+    const logSpy: any = jest.spyOn(console, "log").mockImplementation();
     printer.print(items);
     expect(renderSpy).toBeCalledWith(items);
-    expect(logSpy).toBeCalledWith("render result");
+    expect(logSpy).toBeCalledWith("the-render-result");
     renderSpy.mockRestore();
     logSpy.mockRestore();
 });

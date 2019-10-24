@@ -7,21 +7,21 @@ import { createObjectByPathAndValue, tryParseJson } from "../utils";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
 
-type CommandLineArguments = string[];
+export type CommandLineArguments = string[];
 
 export class CommandLineArgumentsSource implements ConfigurationSourceInterface {
-    private readonly argumentName: string;
     private readonly commandLineArguments: CommandLineArguments;
+    private readonly argumentName: string;
 
     public constructor(
-        argumentName: string,
         commandLineArguments: CommandLineArguments,
+        argumentName: string,
     ) {
         if (argumentName === "") {
             throw new ConfigurationSourceError("The command line argument name can not be empty.");
         }
-        this.argumentName = argumentName;
         this.commandLineArguments = commandLineArguments;
+        this.argumentName = argumentName;
     }
 
     public resolve(): object {
@@ -68,6 +68,6 @@ export class CommandLineArgumentsSource implements ConfigurationSourceInterface 
     private keyToPath(key: string): string[] {
         return key
             .split(/\.{1,}/)
-            .map((value) => camelCase(value));
+            .map((value: string): string => camelCase(value));
     }
 }

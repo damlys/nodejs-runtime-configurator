@@ -15,11 +15,11 @@ export class ConfigurationBag implements ConfigurationBagInterface {
     ) {
         this.items = items;
 
-        const resolvedObject = (new SourcesAggregator(sources)).resolve();
+        const resolvedObject: object = (new SourcesAggregator(sources)).resolve();
 
         const errors: string[] = [];
         for (const item of this.items) {
-            const value = getFromObjectByPath(
+            const value: any = getFromObjectByPath(
                 resolvedObject,
                 item.getKey().split("."),
             );
@@ -28,7 +28,7 @@ export class ConfigurationBag implements ConfigurationBagInterface {
             }
             item
                 .validate(value)
-                .forEach((error) => {
+                .forEach((error: string): void => {
                     errors.push(`"${item.getKey()}": ${error}`);
                 });
             item.setValue(value);
@@ -59,7 +59,7 @@ export class ConfigurationBag implements ConfigurationBagInterface {
     }
 
     private find(key: string): ConfigurationItemInterface | undefined {
-        return this.items.find((item) => {
+        return this.items.find((item: ConfigurationItemInterface): boolean => {
             return item.getKey() === key;
         });
     }

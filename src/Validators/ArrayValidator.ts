@@ -29,10 +29,10 @@ export class ArrayValidator implements ConfigurationValidatorInterface {
             errors.push(`Array must have at most ${this.maximumLength} items.`);
         }
 
-        for (let i = 0; i < values.length; i++) {
+        for (let i: number = 0; i < values.length; i++) {
             this.validator
                 .validate(values[i])
-                .forEach((error) => {
+                .forEach((error: string): void => {
                     errors.push(`[${i}] ${error}`);
                 });
         }

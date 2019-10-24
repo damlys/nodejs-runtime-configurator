@@ -6,23 +6,23 @@ import { createObjectByPathAndValue, tryParseJson } from "../utils";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
 
-interface EnvironmentVariables {
+export interface EnvironmentVariables {
     [key: string]: string | undefined;
 }
 
 export class EnvironmentVariablesSource implements ConfigurationSourceInterface {
-    private readonly variableName: string;
     private readonly environmentVariables: EnvironmentVariables;
+    private readonly variableName: string;
 
     public constructor(
-        variableName: string,
         environmentVariables: EnvironmentVariables,
+        variableName: string,
     ) {
         if (variableName === "") {
             throw new ConfigurationSourceError("The environment variable name can not be empty.");
         }
-        this.variableName = variableName;
         this.environmentVariables = environmentVariables;
+        this.variableName = variableName;
     }
 
     public resolve(): object {
@@ -51,9 +51,9 @@ export class EnvironmentVariablesSource implements ConfigurationSourceInterface 
     }
 
     private keyToPath(key: string): string[] {
-        const path = key
+        const path: string[] = key
             .split(/_{2,}/)
-            .map((value) => camelCase(value));
+            .map((value: string): string => camelCase(value));
         path.shift();
         return path;
     }

@@ -7,10 +7,17 @@ import {
     ConfigurationBag,
     ConfigurationBagInterface,
     ConfigurationItem,
+    ConfigurationItemInterface,
+    ConfigurationPrinterInterface,
+    ConfigurationSourceInterface,
+    ConfigurationValidatorInterface,
     DirectorySource,
+    EnumerableValidator,
     EnvironmentVariablesSource,
     FileSource,
     NumberValidator,
+    ObjectValidator,
+    RegularExpressionValidator,
     StandardOutputPrinter,
     StringValidator,
 } from "../../src";
@@ -93,8 +100,8 @@ const configuration: ConfigurationBagInterface = new ConfigurationBag(
         new DirectorySource(path.join(os.homedir(), ".app"), false),
         new FileSource(path.join(os.homedir(), ".app.json"), false),
 
-        new EnvironmentVariablesSource("APP", process.env),
-        new CommandLineArgumentsSource("override", process.argv),
+        new EnvironmentVariablesSource(process.env, "APP"),
+        new CommandLineArgumentsSource(process.argv, "override"),
     ],
 );
 

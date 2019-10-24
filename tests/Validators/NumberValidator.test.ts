@@ -27,7 +27,7 @@ test("should pass only numbers", () => {
     }
 });
 
-test("should check if is integer", () => {
+test("should check if is an integer", () => {
     const validator: ConfigurationValidatorInterface = new NumberValidator(true);
 
     expect(validator.validate(-1.1))

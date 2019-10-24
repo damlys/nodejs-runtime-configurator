@@ -9,15 +9,15 @@ test("should check if values list is not empty", () => {
 });
 
 test("should pass only listed values", () => {
-    const values: any[] = [
+    const allowedValues: any[] = [
         null,
         true,
         1,
         "foo",
     ];
-    const validator: ConfigurationValidatorInterface = new EnumerableValidator(values);
+    const validator: ConfigurationValidatorInterface = new EnumerableValidator(allowedValues);
 
-    for (const value of values) {
+    for (const value of allowedValues) {
         expect(validator.validate(value))
             .toEqual([]);
     }

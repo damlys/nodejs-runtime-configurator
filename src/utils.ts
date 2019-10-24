@@ -6,8 +6,8 @@ export function createObjectByPathAndValue(path: string[], value: any): object {
     }
 
     const result: any = {};
-    let pointer = result;
-    for (let i = 0; i < path.length - 1; i++) {
+    let pointer: any = result;
+    for (let i: number = 0; i < path.length - 1; i++) {
         pointer = pointer[path[i]] = {};
     }
     pointer[path[path.length - 1]] = value;
@@ -22,7 +22,7 @@ export function getFromObjectByPath(target: any, path: string[]): any {
         throw new Error("Path can not be empty.");
     }
 
-    let pointer = target;
+    let pointer: any = target;
     for (const key of path) {
         if (typeof pointer !== "object" || pointer === null || !pointer.hasOwnProperty(key)) {
             return undefined;

@@ -100,7 +100,7 @@ test("should validate configuration items", () => {
     ));
 });
 
-test("should use printer to generate documentation", () => {
+test("should use printer to generate a documentation", () => {
     const items: ConfigurationItemInterface[] = [
         new ConfigurationItem("foo", "Foo.", "foo content"),
     ];
@@ -111,19 +111,19 @@ test("should use printer to generate documentation", () => {
 
     const printer: ConfigurationPrinterInterface = {
         render(i: ConfigurationItemInterface[]): string {
-            return "render result";
+            return "the-render-result";
         },
         print(i: ConfigurationItemInterface[]): void {
             return;
         },
     };
 
-    const renderSpy = jest.spyOn(printer, "render");
-    expect(configurationBag.render(printer)).toBe("render result");
+    const renderSpy: any = jest.spyOn(printer, "render");
+    expect(configurationBag.render(printer)).toBe("the-render-result");
     expect(renderSpy).toBeCalledWith(items);
     renderSpy.mockRestore();
 
-    const printSpy = jest.spyOn(printer, "print");
+    const printSpy: any = jest.spyOn(printer, "print");
     configurationBag.print(printer);
     expect(printSpy).toBeCalledWith(items);
     printSpy.mockRestore();

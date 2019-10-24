@@ -20,9 +20,14 @@ Features:
 - supports any kind of data types: booleans, numbers, strings,
   objects and arrays,
 - freezes resolved configuration values for mistake proofing
-  (according to *Poka-yoke* principle),
-- prints configuration as table into command line
-  (useful to generate help commands).
+  (according to *poka-yoke* principle),
+- does not collide with most popular CLI tools like 
+  [Commander.js](https://www.npmjs.com/package/commander),
+  [oclif](https://www.npmjs.com/package/oclif)
+  or [Yargs](https://www.npmjs.com/package/yargs),
+- prints configuration as table into standard output
+  (useful to generate help commands),
+- **production ready!**
 
 ## Table of contents
 
@@ -99,8 +104,8 @@ const sources: ConfigurationSourceInterface[] = [
     new DirectorySource(path.join(os.homedir(), ".app"), false),
     new FileSource(path.join(os.homedir(), ".app.json"), false),
 
-    new EnvironmentVariablesSource("APP", process.env),
-    new CommandLineArgumentsSource("override", process.argv)
+    new EnvironmentVariablesSource(process.env, "APP"),
+    new CommandLineArgumentsSource(process.argv, "override")
 ];
 ```
 
@@ -158,7 +163,7 @@ const item: ConfigurationItemInterface = new ConfigurationItem(
 );
 ```
 
-###### BooleanValidator
+###### Boolean validator
 
 ```typescript
 new BooleanValidator()
@@ -166,7 +171,7 @@ new BooleanValidator()
 
 Just checks if value is a boolean.
 
-###### NumberValidator
+###### Number validator
 
 ```typescript
 new NumberValidator(true, 1, 10)
@@ -175,7 +180,7 @@ new NumberValidator(true, 1, 10)
 Checks if value is an integer, bigger than or equal 1
 and smaller than or equal 10.
 
-###### StringValidator
+###### String validator
 
 ```typescript
 new StringValidator(5, 10)
@@ -184,7 +189,7 @@ new StringValidator(5, 10)
 Checks if value is a string with minimum length
 of 5 and maximum length of 10.
 
-###### RegularExpressionValidator
+###### Regular expression validator
 
 ```typescript
 new RegularExpressionValidator(/.*/)
@@ -193,7 +198,7 @@ new RegularExpressionValidator(/.*/)
 Checks if value is a string and passes
 regular expression test.
 
-###### EnumerableValidator
+###### Enumerable validator
 
 ```typescript
 new EnumerableValidator([null, true, 1, "foo"])
@@ -201,16 +206,7 @@ new EnumerableValidator([null, true, 1, "foo"])
 
 Checks if value equals `null`, `true`, `1` or `"foo"`.
 
-###### ArrayValidator
-
-```typescript
-new ArrayValidator(new BooleanValidator(), 1, 3)
-```
-
-Checks if value is an array of booleans with minimum
-length of 1 and maximum length of 3.
-
-###### ObjectValidator
+###### Object validator
 
 ```typescript
 new ObjectValidator({ foo: new BooleanValidator() })
@@ -218,6 +214,15 @@ new ObjectValidator({ foo: new BooleanValidator() })
 
 Checks if value is an object and it's `foo` property
 is a boolean.
+
+###### Array validator
+
+```typescript
+new ArrayValidator(new BooleanValidator(), 1, 3)
+```
+
+Checks if value is an array of booleans with minimum
+length of 1 and maximum length of 3.
 
 ###### Ad-hoc validator
 

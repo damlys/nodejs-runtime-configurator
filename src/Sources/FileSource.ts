@@ -1,6 +1,6 @@
-import { existsSync, statSync } from "fs";
+import { existsSync, Stats, statSync } from "fs";
 import isPlainObject from "is-plain-object";
-import { isAbsolute, normalize } from "path";
+import { extname, isAbsolute, normalize } from "path";
 import { ConfigurationSourceError } from "./ConfigurationSourceError";
 import { ConfigurationSourceInterface } from "./ConfigurationSourceInterface";
 
@@ -15,7 +15,7 @@ export class FileSource implements ConfigurationSourceInterface {
         if (!isAbsolute(filePath)) {
             throw new ConfigurationSourceError(`The "${normalize(filePath)}" path is not absolute.`);
         }
-        if (!filePath.endsWith(".json") && !filePath.endsWith(".js")) {
+        if (extname(filePath) !== ".json" && extname(filePath) !== ".js") {
             throw new ConfigurationSourceError(`The "${normalize(filePath)}" file path has invalid extension. Only ".json" and ".js" extensions are allowed.`);
         }
         this.filePath = filePath;
@@ -31,16 +31,16 @@ export class FileSource implements ConfigurationSourceInterface {
             }
         }
 
-        const stats = statSync(this.filePath);
+        const stats: Stats = statSync(this.filePath);
         if (!stats.isFile()) {
             throw new ConfigurationSourceError(`The "${normalize(this.filePath)}" path does not point to a file.`);
         }
 
-        const result = require(this.filePath);
+        const result: any = require(this.filePath);
         if (!isPlainObject(result)) {
             throw new ConfigurationSourceError(`The "${normalize(this.filePath)}" file must contain contain a literal object.`);
         }
-        if (this.filePath.endsWith(".js")) {
+        if (extname(this.filePath) === ".js") {
             this.executeFunctions(result);
         }
         return result;
